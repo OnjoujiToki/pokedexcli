@@ -14,7 +14,7 @@ type cliCommand struct {
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
-		"help": cliCommand{
+		"help": {
 			name:        "help",
 			description: "Show help",
 			callback: func() error {
@@ -22,7 +22,7 @@ func getCommands() map[string]cliCommand {
 				return nil
 			},
 		},
-		"version": cliCommand{
+		"version": {
 			name:        "version",
 			description: "Show version",
 			callback: func() error {
@@ -30,7 +30,7 @@ func getCommands() map[string]cliCommand {
 				return nil
 			},
 		},
-		"exit": cliCommand{
+		"exit": {
 			name:        "exit",
 			description: "Exit",
 			callback: func() error {
@@ -44,10 +44,17 @@ func getCommands() map[string]cliCommand {
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	commands := getCommands()
+	fmt.Println("Welcome to CLI")
 	scanner.Scan()
 	for scanner.Text() != "exit" {
 		if command, ok := commands[scanner.Text()]; ok {
-			command.callback()
+			if err := command.callback(); err != nil {
+				if err != nil {
+					return
+				} else {
+					fmt.Println("Command not found")
+				}
+			}
 		} else {
 			fmt.Println("Command not found")
 		}
