@@ -10,41 +10,45 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(defaultConfig *configClient) error
 }
 
-func getCommands() map[string]cliCommand {
+func getCommands(defaultConfig *configClient) map[string]cliCommand {
 	return map[string]cliCommand{
 		"help": {
 			name:        "help",
 			description: "Show help",
-			callback: func() error {
-				printHelp()
-				return nil
-			},
+			callback:    printHelp,
 		},
 		"version": {
 			name:        "version",
 			description: "Show version",
-			callback: func() error {
-				fmt.Println("Version")
+			callback: func(defaultConfig *configClient) error {
+				fmt.Println("v0.0.1")
 				return nil
 			},
 		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the CLI program",
-			callback: func() error {
-				printExit()
-				return nil
-			},
+			callback:    printExit,
+		},
+		"map": {
+			name:        "map",
+			description: "Show map",
+			callback:    printMap,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Show map back",
+			callback:    printMapBack,
 		},
 	}
 }
 
-func startRepl() {
+func startRepl(defaultConfig *configClient) {
 	scanner := bufio.NewScanner(os.Stdin)
-	commands := getCommands()
+	commands := getCommands(defaultConfig)
 	fmt.Println("Welcome to CLI")
 
 	for {
@@ -55,7 +59,7 @@ func startRepl() {
 			continue
 		}
 		if command, ok := commands[text[0]]; ok {
-			if err := command.callback(); err != nil {
+			if err := command.callback(defaultConfig); err != nil {
 				if err != nil {
 					return
 				} else {

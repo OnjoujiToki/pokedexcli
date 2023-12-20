@@ -5,7 +5,8 @@ import (
 	"os"
 )
 
-func printExit() {
+func printExit(defaultConfig *configClient) error {
 	fmt.Println("Goodbye!")
 	os.Exit(0)
+	return nil
 }
