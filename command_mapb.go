@@ -2,15 +2,20 @@ package main
 
 import (
 	"fmt"
-	"log"
 )
 
 func printMapBack(defaultConfig *configClient) error {
-	fmt.Println("Map back")
+	if defaultConfig.previousLocationArea == nil {
+		fmt.Println("No more previous location areas")
+
+		return nil
+	}
 	response, err := defaultConfig.pokeAPIClient.ListLocationAreas(defaultConfig.previousLocationArea)
 	if err != nil {
-		log.Fatalln(err)
+		return err
 	}
+	defaultConfig.nextLocationArea = response.Next
+	defaultConfig.previousLocationArea = response.Previous
 	fmt.Println("Previous Location Areas:")
 	for _, locationArea := range response.Results {
 		fmt.Printf("%s\n", locationArea.Name)
