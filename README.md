@@ -12,5 +12,5 @@ go get github.com/onjoujitoki/pokedexcli
 - [x] Try to catch a pokemon
 - [x] Help Manual
 - [x] Check if you've caught a specific pokemons in a map
-- [] Fix the probability of catching a pokemon
+- [ ] Fix the probability of catching a pokemon
 
