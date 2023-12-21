@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 func catchPokemon(defaultConfig *configClient, args ...string) error {
 	// parse args
@@ -13,20 +16,16 @@ func catchPokemon(defaultConfig *configClient, args ...string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("You catched %s\n", data.Name)
-	for _, ability := range data.Abilities {
-		fmt.Printf("Ability: %s\n", ability.Ability.Name)
+	experience := data.BaseExperience
+	randomNumber := rand.Intn(experience)
+	const threshold = 40
+
+	if randomNumber < threshold {
+		fmt.Println("Pokemon was not caught")
+		return nil
 	}
-	fmt.Printf("Base experience: %d\n", data.BaseExperience)
-	fmt.Printf("Height: %d\n", data.Height)
-	fmt.Printf("Weight: %d\n", data.Weight)
-	fmt.Printf("Order: %d\n", data.Order)
-	fmt.Printf("ID: %d\n", data.ID)
-	fmt.Printf("Is default: %t\n", data.IsDefault)
-	fmt.Printf("Location area encounters: %s\n", data.LocationAreaEncounters)
-	fmt.Printf("Name: %s\n", data.Name)
-	fmt.Printf("Species: %s\n", data.Species.Name)
-	fmt.Printf("Sprites: %s\n", data.Sprites.FrontDefault)
+	fmt.Println("Pokemon was caught, its name is", data.Name)
+	defaultConfig.caughtPokemon[data.Name] = data
 
 	return nil
 }

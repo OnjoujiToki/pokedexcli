@@ -53,6 +53,11 @@ func getCommands(defaultConfig *configClient) map[string]cliCommand {
 			description: "Catch a pokemon",
 			callback:    catchPokemon,
 		},
+		"check": {
+			name:        "check {pokemon}",
+			description: "Check if a pokemon was caught",
+			callback:    checkPokemon,
+		},
 	}
 }
 
