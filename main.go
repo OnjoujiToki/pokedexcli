@@ -1,6 +1,9 @@
 package main
 
-import "github.com/OnjoujiToki/pokedexcli/internal/pokeapi"
+import (
+	"github.com/OnjoujiToki/pokedexcli/internal/pokeapi"
+	"time"
+)
 
 type configClient struct {
 	pokeAPIClient        pokeapi.Client
@@ -10,7 +13,7 @@ type configClient struct {
 
 func main() {
 	defaultConfig := configClient{
-		pokeAPIClient: pokeapi.NewClient(),
+		pokeAPIClient: pokeapi.NewClient(time.Minute * 60),
 	}
 	startRepl(&defaultConfig)
 
