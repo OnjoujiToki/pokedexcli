@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func printHelp(defaultConfig *configClient) error {
+func printHelp(defaultConfig *configClient, args ...string) error {
 	fmt.Println("Welcome to the Pokedex CLI helper")
 	avaliableCommands := getCommands(defaultConfig)
 	for _, command := range avaliableCommands {

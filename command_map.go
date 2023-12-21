@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func printMap(defaultConfig *configClient) error {
+func printMap(defaultConfig *configClient, args ...string) error {
 	// the following codes will show the complete maps name for pokemon world
 	response, err := defaultConfig.pokeAPIClient.ListLocationAreas(defaultConfig.nextLocationArea)
 	if err != nil {

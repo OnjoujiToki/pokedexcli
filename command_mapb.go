@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func printMapBack(defaultConfig *configClient) error {
+func printMapBack(defaultConfig *configClient, args ...string) error {
 	if defaultConfig.previousLocationArea == nil {
 		fmt.Println("No more previous location areas")
 
