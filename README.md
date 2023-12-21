@@ -1,4 +1,6 @@
 # pokedexcli
+[![wakatime](https://wakatime.com/badge/github/OnjoujiToki/pokedexcli.svg)](https://wakatime.com/badge/github/OnjoujiToki/pokedexcli)
+
 A CLI application based on Go to interact with Pokemons
 
 ## Installation
